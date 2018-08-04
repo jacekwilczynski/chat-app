@@ -7,11 +7,13 @@ import Button from 'components/Button';
 class LoginForm extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    errors: PropTypes.shape({ nickname: PropTypes.string })
   };
 
   static defaultProps = {
-    onChange: () => {}
+    onChange: () => {},
+    errors: { nickname: null }
   };
 
   componentDidMount() {
@@ -19,7 +21,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { onChange, onSubmit } = this.props;
+    const { onChange, onSubmit, errors } = this.props;
     return (
       <Form
         ref={element => {
@@ -28,18 +30,23 @@ class LoginForm extends React.Component {
         onSubmit={onSubmit}
       >
         <Form.Group>
-          <TextAlign.Center>
-            <Form.Label htmlFor="nickname">Enter your nickname:</Form.Label>
-            <Form.Input
-              type="text"
-              id="nickname"
-              name="nickname"
-              innerRef={element => {
-                this.input = element;
-              }}
-              onChange={onChange}
-            />
-          </TextAlign.Center>
+          {({ width }) => (
+            <TextAlign.Center>
+              <Form.Label htmlFor="nickname">Enter your nickname:</Form.Label>
+              <Form.Input
+                type="text"
+                id="nickname"
+                name="nickname"
+                innerRef={element => {
+                  this.input = element;
+                }}
+                onChange={onChange}
+              />
+              <Form.Error maxWidth={width + 'px' || 'auto'}>
+                {errors.nickname}
+              </Form.Error>
+            </TextAlign.Center>
+          )}
         </Form.Group>
         <Form.Group>
           <TextAlign.Right>
