@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: radial-gradient(ellipse at top, transparent, rgb(212, 212, 212)),
+  radial-gradient(ellipse at bottom, transparent, rgb(255, 255, 255));
+  font-family: Ubuntu, Verdana, sans-serif;
+  font-size: 16px;
+  height: 100vh;
+}
