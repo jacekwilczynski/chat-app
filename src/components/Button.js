@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import flow from 'lodash.flow';
 import { darken, saturate, transparentize } from 'polished';
 
@@ -13,7 +14,7 @@ const activeColor = flow(
 );
 
 const Button = styled.button`
-  background-color: ${props => colors[props.theme]};
+  background-color: ${props => colors[props.kind]};
   border: none;
   border-radius: 0.3em;
   color: white;
@@ -24,12 +25,20 @@ const Button = styled.button`
   text-shadow: 0 0 5px black;
 
   &:hover {
-    background-color: ${props => transparentize(0.2, colors[props.theme])};
+    background-color: ${props => transparentize(0.2, colors[props.kind])};
   }
 
   &:active {
-    background: ${props => activeColor(colors[props.theme])};
+    background: ${props => activeColor(colors[props.kind])};
   }
 `;
+
+Button.propTypes = {
+  kind: PropTypes.oneOf(['seagreen', 'default'])
+};
+
+Button.defaultProps = {
+  kind: 'default'
+};
 
 export default Button;

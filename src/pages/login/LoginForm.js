@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
         </Form.Group>
         <Form.Group>
           <TextAlign.Right>
-            <Button theme="success">Join</Button>
+            <Button kind="success">Join</Button>
           </TextAlign.Right>
         </Form.Group>
       </Form>
