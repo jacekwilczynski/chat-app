@@ -1,11 +1,28 @@
 import * as userActions from 'actions/user';
-import * as apiActions from 'actions/api';
+import * as socketActions from 'actions/socket';
 
 const join = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === userActions.JOIN) {
-    dispatch(apiActions.connect({ nickname: action.payload.nickname }));
+    dispatch(socketActions.join({ nickname: action.payload.nickname }));
   }
 };
 
-export default [join];
+const joinAccept = ({ dispatch }) => next => action => {
+  next(action);
+  if (
+    action.type === socketActions.messageReceived &&
+    action.payload.type === 'JOIN_ACCEPT'
+  ) {
+    dispatch(userActions.loggedIn(action.payload));
+  }
+};
+
+const loggedIn = ({ dispatch }) => next => action => {
+  next(action);
+  if (action.type === userActions.loggedIn) {
+    alert('Logged in!');
+  }
+};
+
+export default [join, joinAccept, loggedIn];
