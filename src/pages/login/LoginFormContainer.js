@@ -1,35 +1,28 @@
-import React from 'react';
+import { connect } from 'react-redux';
+import { getLoginViewErrors } from 'reducer';
+import { inputNickname } from 'actions/loginView';
 import LoginForm from 'pages/login/LoginForm';
 
-class LoginFormContainer extends React.Component {
-  state = {
-    errors: {
-      nickname: null
+const mapStateToProps = state => ({
+  errors: getLoginViewErrors(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  onChange: e => {
+    const element = e.target;
+    if (element.name === 'nickname') {
+      dispatch(inputNickname(element.value));
     }
-  };
-
-  handleChange = async e => {
-    const nickname = e.target.value;
-    const res = await fetch('/api/check_nickname/' + nickname);
-    const nicknameAvailable = (await res.text()) === 'true';
-    this.setState({
-      errors: {
-        nickname: nicknameAvailable
-          ? null
-          : `Nickname '${nickname}' is currently used by someone else.`
-      }
-    });
-  };
-
-  render() {
-    return (
-      <LoginForm
-        errors={this.state.errors}
-        onSubmit={() => {}}
-        onChange={this.handleChange}
-      />
-    );
+  },
+  onSubmit: e => {
+    e.preventDefault();
+    console.log(`Submitting.`);
   }
-}
+});
+
+const LoginFormContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm);
 
 export default LoginFormContainer;

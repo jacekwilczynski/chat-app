@@ -3,7 +3,7 @@ const app = express();
 
 const users = ['Eric'];
 
-app.get('/api/check_nickname/:value?', (req, res) => {
+app.get('/api/check-nickname/:value?', (req, res) => {
   res.send(!users.includes(req.params.value));
 });
 
