@@ -6,7 +6,7 @@ export const checkAvailability = nickname => ({
   type: CHECK_AVAILABILITY,
   payload: nickname,
   meta: {
-    throttle: 1000
+    throttle: 500
   }
 });
 
