@@ -43,7 +43,7 @@ const Button = styled.button`
 `;
 
 Button.propTypes = {
-  kind: PropTypes.oneOf(['seagreen', 'default'])
+  kind: PropTypes.oneOf(['success', 'default'])
 };
 
 Button.defaultProps = {
