@@ -1,5 +1,6 @@
 import * as loginViewActions from 'actions/loginView';
 import * as nicknameActions from 'actions/nickname';
+import * as userActions from 'actions/user';
 
 const input = ({ dispatch }) => next => action => {
   next(action);
@@ -17,6 +18,8 @@ const submit = ({ dispatch }) => next => action => {
   if (action.type === loginViewActions.SUBMIT) {
     const event = action.payload;
     const form = event.target;
+    const nickname = form.nickname.value;
+    dispatch(userActions.join(nickname));
   }
 };
 
