@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getLoginViewErrors } from 'reducer';
-import { nicknameEdited } from 'actions/loginView';
+import * as loginViewActions from 'actions/loginView';
 import LoginForm from 'pages/login/LoginForm';
 
 const mapStateToProps = state => ({
@@ -8,15 +8,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChange: e => {
-    const element = e.target;
-    if (element.name === 'nickname') {
-      dispatch(nicknameEdited(element.value));
-    }
+  onChange: event => {
+    dispatch(loginViewActions.input(event));
   },
-  onSubmit: e => {
-    e.preventDefault();
-    console.log(`Submitting.`);
+  onSubmit: event => {
+    event.preventDefault();
+    dispatch(loginViewActions.submit(event));
   }
 });
 
