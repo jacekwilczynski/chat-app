@@ -1,4 +1,4 @@
-import { CHANGE_ERROR_STATE } from 'actions/loginView';
+import { UPDATE_ERROR_STATE } from 'actions/loginView';
 
 const initialState = {
   errors: {
@@ -8,7 +8,7 @@ const initialState = {
 
 const loginView = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_ERROR_STATE:
+    case UPDATE_ERROR_STATE:
       return { ...state, errors: { ...state.errors, ...action.payload } };
     default:
       return state;
