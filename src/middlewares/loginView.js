@@ -1,11 +1,25 @@
 import * as loginViewActions from 'actions/loginView';
-import * as apiActions from 'actions/api';
+import * as nicknameActions from 'actions/nickname';
 
-const inputNickname = store => next => action => {
+const nicknameEdited = ({ dispatch }) => next => action => {
   next(action);
-  if (action.type === loginViewActions.INPUT_NICKNAME) {
-    store.dispatch(apiActions.checkNickname(action.payload));
+  if (action.type === loginViewActions.NICKNAME_EDITED) {
+    dispatch(nicknameActions.checkAvailability(action.payload));
   }
 };
 
-export default [inputNickname];
+const updateNicknameAvailability = ({ dispatch }) => next => action => {
+  next(action);
+  if (action.type === nicknameActions.UPDATE_AVAILABILITY) {
+    const { nickname, isAvailable } = action.payload;
+    dispatch(
+      loginViewActions.updateErrorState({
+        nickname: isAvailable
+          ? null
+          : `Nickname ${nickname} is already used by someone else.`
+      })
+    );
+  }
+};
+
+export default [nicknameEdited, updateNicknameAvailability];

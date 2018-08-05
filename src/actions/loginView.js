@@ -1,8 +1,8 @@
-export const INPUT_NICKNAME = '[loginView] INPUT_NICKNAME';
+export const NICKNAME_EDITED = '[loginView] NICKNAME_EDITED';
 export const UPDATE_ERROR_STATE = '[loginView] UPDATE_ERROR_STATE';
 
-export const inputNickname = nickname => ({
-  type: INPUT_NICKNAME,
+export const nicknameEdited = nickname => ({
+  type: NICKNAME_EDITED,
   payload: nickname
 });
 

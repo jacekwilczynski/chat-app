@@ -1,35 +1,28 @@
+import { get } from 'axios';
 import * as apiActions from 'actions/api';
-import * as loginViewActions from 'actions/loginView';
-import * as api from 'utils/api';
 
-const checkNickname = store => next => action => {
+const request = ({ dispatch }) => next => action => {
   next(action);
-  if (action.type === apiActions.CHECK_NICKNAME) {
-    const nickname = action.payload;
-    api.checkNickname(nickname).then(isAvailable => {
-      store.dispatch(
-        apiActions.receiveNicknameFeedback({
-          isAvailable,
-          nickname
-        })
-      );
-    });
-  }
-};
-
-const receiveNicknameFeedback = store => next => action => {
-  next(action);
-  if (action.type === apiActions.RECEIVE_NICKNAME_FEEDBACK) {
-    store.dispatch(
-      loginViewActions.updateErrorState({
-        nickname: action.payload.isAvailable
-          ? null
-          : `Nickname '${
-              action.payload.nickname
-            }' is currently used by someone else.`
-      })
+  if (action.type === apiActions.REQUEST) {
+    const { url, onSuccess, onError, ...requestOptions } = action.payload;
+    get(url, requestOptions).then(
+      res => {
+        dispatch({
+          type: onSuccess,
+          payload: res,
+          meta: action.meta
+        });
+      },
+      err => {
+        dispatch({
+          type: onError,
+          error: true,
+          payload: err,
+          meta: action.meta
+        });
+      }
     );
   }
 };
 
-export default [checkNickname, receiveNicknameFeedback];
+export default [request];
