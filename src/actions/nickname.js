@@ -4,7 +4,10 @@ export const UPDATE_AVAILABILITY = '[nickname] UPDATE_AVAILABILITY';
 
 export const checkAvailability = nickname => ({
   type: CHECK_AVAILABILITY,
-  payload: nickname
+  payload: nickname,
+  meta: {
+    throttle: 1000
+  }
 });
 
 export const receiveAvailability = (response, meta) => ({
