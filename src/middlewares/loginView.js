@@ -16,7 +16,7 @@ const updateNicknameAvailability = ({ dispatch }) => next => action => {
       loginViewActions.updateErrorState({
         nickname: isAvailable
           ? null
-          : `Nickname ${nickname} is already used by someone else.`
+          : `Nickname "${nickname}" is already used by someone else.`
       })
     );
   }
