@@ -12,6 +12,8 @@ const FormInput = styled.input`
   max-width: 100%;
   padding: 0.5em;
   text-align: inherit;
+
+  ${props => props.error && `outline-color: red;`};
 `;
 
 export default FormInput;

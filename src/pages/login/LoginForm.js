@@ -4,6 +4,8 @@ import Form from 'components/Form';
 import TextAlign from 'components/TextAlign';
 import Button from 'components/Button';
 
+const hasAny = map => Object.keys(map).filter(key => map[key]).length > 0;
+
 class LoginForm extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
@@ -41,6 +43,7 @@ class LoginForm extends React.Component {
                   this.input = element;
                 }}
                 onChange={onChange}
+                error={errors.nickname}
               />
               <Form.Error maxWidth={width + 'px' || 'auto'}>
                 {errors.nickname}
@@ -50,7 +53,9 @@ class LoginForm extends React.Component {
         </Form.Group>
         <Form.Group>
           <TextAlign.Right>
-            <Button kind="success">Join</Button>
+            <Button kind="success" disabled={hasAny(errors)}>
+              Join
+            </Button>
           </TextAlign.Right>
         </Form.Group>
       </Form>

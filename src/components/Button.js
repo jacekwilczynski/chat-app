@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import flow from 'lodash.flow';
-import { darken, saturate, transparentize } from 'polished';
+import { darken, desaturate, saturate, transparentize } from 'polished';
 
 const colors = {
   success: 'seagreen',
@@ -24,12 +24,21 @@ const Button = styled.button`
   position: relative;
   text-shadow: 0 0 5px black;
 
-  &:hover {
-    background-color: ${props => transparentize(0.2, colors[props.kind])};
+  ${props =>
+    props.disabled
+    ? css`
+    background-color: ${desaturate(1, colors[props.kind])};
+    cursor: not-allowed;
+    `
+    : css`
+    &:hover {
+      background-color: ${transparentize(0.2, colors[props.kind])};
+    }
+    `
   }
 
   &:active {
-    background: ${props => activeColor(colors[props.kind])};
+    background-color: ${props => activeColor(colors[props.kind])};
   }
 `;
 
