@@ -17,13 +17,17 @@
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon src/server",
+    "server-once": "babel-node server",
+    "server": "nodemon --exec npm run server-once",
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "concurrently": "^3.6.1",
     "nodemon": "^1.18.3",
     "prettier": "^1.14.0",

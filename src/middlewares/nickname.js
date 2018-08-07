@@ -1,5 +1,5 @@
-import * as nicknameActions from 'actions/nickname';
 import * as apiActions from 'actions/api';
+import * as nicknameActions from 'actions/nickname';
 
 const checkAvailability = ({ dispatch }) => next => action => {
   next(action);
@@ -7,7 +7,7 @@ const checkAvailability = ({ dispatch }) => next => action => {
     const nickname = action.payload;
     dispatch(
       apiActions.request({
-        url: `/api/check-nickname/${nickname}`,
+        url: `/api/nickname/check/${nickname}`,
         onSuccess: nicknameActions.RECEIVE_AVAILABILITY,
         meta: { nickname }
       })

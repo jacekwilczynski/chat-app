@@ -1,17 +1,14 @@
+import routes from 'routes';
+
 const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
 const app = express();
-
-const users = ['Eric'];
-
-const nicknameAvailable = nickname => !users.includes(nickname);
-
-app.get('/api/check-nickname/:nickname?', (req, res) => {
-  res.send(nicknameAvailable(req.params.nickname));
-});
-
 const server = http.createServer(app);
+
+routes.forEach(({ method, url, controller }) => {
+  app[method.toLocaleLowerCase()](url, controller);
+});
 
 const webSocketServer = new WebSocket.Server({ server });
 
