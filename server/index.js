@@ -1,14 +1,16 @@
+import express from 'express';
+import http from 'http';
 import routes from 'routes';
+import * as services from 'services';
+import WebSocket from 'ws';
 
-const express = require('express');
-const http = require('http');
-const WebSocket = require('ws');
 const app = express();
-const server = http.createServer(app);
 
 routes.forEach(({ method, url, controller }) => {
-  app[method.toLocaleLowerCase()](url, controller);
+  app[method.toLocaleLowerCase()](url, controller(services));
 });
+
+const server = http.createServer(app);
 
 const webSocketServer = new WebSocket.Server({ server });
 
