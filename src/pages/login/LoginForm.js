@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import Button from 'components/Button';
 import Form from 'components/Form';
 import TextAlign from 'components/TextAlign';
-import Button from 'components/Button';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const hasAny = map => Object.keys(map).filter(key => map[key]).length > 0;
 
@@ -25,12 +25,7 @@ class LoginForm extends React.Component {
   render() {
     const { onChange, onSubmit, errors } = this.props;
     return (
-      <Form
-        ref={element => {
-          this.form = element;
-        }}
-        onSubmit={onSubmit}
-      >
+      <Form onSubmit={onSubmit}>
         <Form.Group>
           {({ width }) => (
             <TextAlign.Center>
