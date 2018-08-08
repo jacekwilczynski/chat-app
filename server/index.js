@@ -1,33 +1,17 @@
-import express from 'express';
-import http from 'http';
-import routes from 'routes';
-import * as services from 'services';
+import * as serverActions from 'actions/server';
+import configureStore from 'configureStore';
 import WebSocket from 'ws';
 
-const app = express();
-
-routes.forEach(({ method, url, controller }) => {
-  app[method.toLocaleLowerCase()](url, controller(services));
+const server = new WebSocket.Server({
+  port: process.env.PORT || 5000
 });
 
-const server = http.createServer(app);
+const { dispatch } = configureStore();
 
-const webSocketServer = new WebSocket.Server({ server });
-
-webSocketServer.on('connection', ws => {
-  ws.on('message', json => {
-    const message = JSON.parse(json);
-    if (message.type === 'JOIN_REQUEST') {
-      ws.send(
-        JSON.stringify({
-          type: nicknameAvailable(message.payload.nickname)
-            ? 'JOIN_ACCEPT'
-            : 'JOIN_REJECT',
-          payload: message.payload
-        })
-      );
-    }
-  });
+server.on('listening', () => {
+  dispatch(serverActions.listening({ port: server.address().port }));
 });
 
-server.listen(process.env.PORT || 5000);
+server.on('connection', (socket, request) => {
+  dispatch(serverActions.connection({ socket, request }));
+});
