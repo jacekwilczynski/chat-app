@@ -1,5 +1,5 @@
-import * as socketActions from 'actions/socket';
-import configureSocket from 'middlewares/socket/configure';
+import * as socketActions from 'client/actions/socket';
+import configureSocket from './socket/configure';
 
 const { socket, injectDispatch: inject } = configureSocket();
 export const injectDispatch = inject;

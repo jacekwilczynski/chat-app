@@ -1,5 +1,5 @@
-import * as serverActions from 'actions/server';
-import { isNicknameAvailable } from 'reducer';
+import * as serverActions from 'server/actions/server';
+import { isNicknameAvailable } from 'server/reducer';
 
 const check = ({ dispatch, getState }) => next => action => {
   next(action);

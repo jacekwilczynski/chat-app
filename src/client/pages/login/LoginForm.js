@@ -1,6 +1,6 @@
-import Button from 'components/Button';
-import Form from 'components/Form';
-import TextAlign from 'components/TextAlign';
+import Button from 'client/components/Button';
+import Form from 'client/components/Form';
+import TextAlign from 'client/components/TextAlign';
 import PropTypes from 'prop-types';
 import React from 'react';
 

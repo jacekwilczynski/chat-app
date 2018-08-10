@@ -1,5 +1,5 @@
-import * as serverActions from 'actions/server';
-import configureStore from 'configureStore';
+import * as serverActions from 'server/actions/server';
+import configureStore from 'server/configureStore';
 import WebSocket from 'ws';
 
 const server = new WebSocket.Server({

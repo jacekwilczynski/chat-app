@@ -1,5 +1,5 @@
-import * as nicknameActions from 'actions/nickname';
-import * as socketActions from 'actions/socket';
+import * as nicknameActions from 'client/actions/nickname';
+import * as socketActions from 'client/actions/socket';
 
 const checkAvailability = ({ dispatch }) => next => action => {
   next(action);

@@ -1,7 +1,7 @@
-import * as loginViewActions from 'actions/loginView';
-import LoginForm from 'pages/login/LoginForm';
+import * as loginViewActions from 'client/actions/loginView';
+import { getLoginViewErrors } from 'client/reducer';
 import { connect } from 'react-redux';
-import { getLoginViewErrors } from 'reducer';
+import LoginForm from './LoginForm';
 
 const mapStateToProps = state => ({
   errors: getLoginViewErrors(state)

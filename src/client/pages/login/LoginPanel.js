@@ -1,8 +1,8 @@
-import Center from 'components/Center';
-import FontSize from 'components/FontSize';
-import Panel from 'components/Panel';
-import LoginFormContainer from 'pages/login/LoginFormContainer';
+import Center from 'client/components/Center';
+import FontSize from 'client/components/FontSize';
+import Panel from 'client/components/Panel';
 import React from 'react';
+import LoginFormContainer from './LoginFormContainer';
 
 const LoginPanel = () => (
   <Center>

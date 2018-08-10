@@ -1,5 +1,5 @@
-import * as socketActions from 'actions/socket';
-import * as userActions from 'actions/user';
+import * as socketActions from 'client/actions/socket';
+import * as userActions from 'client/actions/user';
 
 const join = ({ dispatch }) => next => action => {
   next(action);

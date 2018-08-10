@@ -1,4 +1,4 @@
-import Register from 'middlewares/throttle/Register';
+import Register from './throttle/Register';
 
 const actions = Register();
 

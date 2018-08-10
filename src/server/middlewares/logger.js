@@ -1,4 +1,4 @@
-import * as serverActions from 'actions/server';
+import * as serverActions from 'server/actions/server';
 import { inspect } from 'util';
 
 const subLoggers = {

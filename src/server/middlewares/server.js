@@ -1,5 +1,5 @@
-import * as errorActions from 'actions/error';
-import * as serverActions from 'actions/server';
+import * as errorActions from 'server/actions/error';
+import * as serverActions from 'server/actions/server';
 
 const connection = ({ dispatch }) => next => action => {
   next(action);

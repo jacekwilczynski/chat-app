@@ -1,4 +1,4 @@
-import loginView, * as fromLoginView from 'reducers/loginView';
+import loginView, * as fromLoginView from 'client/reducers/loginView';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({

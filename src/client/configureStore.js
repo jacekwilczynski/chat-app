@@ -1,5 +1,5 @@
-import middlewares from 'middlewares';
-import reducer from 'reducer';
+import middlewares from 'client/middlewares';
+import reducer from 'client/reducer';
 import { applyMiddleware, createStore } from 'redux';
 
 if (process.env.NODE_ENV === 'development') {

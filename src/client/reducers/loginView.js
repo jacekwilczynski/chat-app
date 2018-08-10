@@ -1,4 +1,4 @@
-import { UPDATE_ERROR_STATE } from 'actions/loginView';
+import { UPDATE_ERROR_STATE } from 'client/actions/loginView';
 
 const initialState = {
   errors: {

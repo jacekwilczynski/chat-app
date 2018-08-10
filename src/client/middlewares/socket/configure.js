@@ -1,5 +1,5 @@
-import * as errorActions from 'actions/error';
-import * as socketActions from 'actions/socket';
+import * as errorActions from 'client/actions/error';
+import * as socketActions from 'client/actions/socket';
 
 const configureSocket = () => {
   const socketUrl =

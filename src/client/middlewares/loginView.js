@@ -1,6 +1,6 @@
-import * as loginViewActions from 'actions/loginView';
-import * as nicknameActions from 'actions/nickname';
-import * as userActions from 'actions/user';
+import * as loginViewActions from 'client/actions/loginView';
+import * as nicknameActions from 'client/actions/nickname';
+import * as userActions from 'client/actions/user';
 
 const input = ({ dispatch }) => next => action => {
   next(action);
