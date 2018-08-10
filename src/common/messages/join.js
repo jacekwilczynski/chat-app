@@ -1,6 +1,5 @@
 export const REQUEST = '[join] REQUEST';
-export const ACCEPTED = '[join] ACCEPTED';
-export const REJECTED = '[join] REJECTED';
+export const RESPONSE = '[join] RESPONSE';
 
 export const request = nickname => ({
   type: REQUEST,
@@ -9,12 +8,7 @@ export const request = nickname => ({
   }
 });
 
-export const accepted = nickname => ({
-  type: ACCEPTED,
-  payload: { nickname }
-});
-
-export const rejected = reason => ({
-  type: REJECTED,
-  payload: reason
+export const response = accepted => ({
+  type: RESPONSE,
+  payload: { accepted }
 });

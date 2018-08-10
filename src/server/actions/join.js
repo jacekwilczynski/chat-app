@@ -1,20 +1,7 @@
 export const REQUESTED = '[join] REQUESTED';
-export const ACCEPT = '[join] ACCEPT';
-export const REJECT = '[join] REJECT';
 
-export const requested = nickname => ({
+export const requested = ({ nickname }, next) => ({
   type: REQUESTED,
-  payload: {
-    nickname
-  }
-});
-
-export const accept = nickname => ({
-  type: ACCEPT,
-  payload: { nickname }
-});
-
-export const reject = reason => ({
-  type: REJECT,
-  payload: reason
+  payload: { nickname },
+  meta: { next }
 });
