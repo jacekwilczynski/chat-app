@@ -1,6 +1,6 @@
+import * as joinActions from 'client/actions/join';
 import * as loginViewActions from 'client/actions/loginView';
 import * as nicknameActions from 'client/actions/nickname';
-import * as userActions from 'client/actions/user';
 
 const input = ({ dispatch }) => next => action => {
   next(action);
@@ -19,7 +19,7 @@ const submit = ({ dispatch }) => next => action => {
     const event = action.payload;
     const form = event.target;
     const nickname = form.nickname.value;
-    dispatch(userActions.join(nickname));
+    dispatch(joinActions.request(nickname));
   }
 };
 
