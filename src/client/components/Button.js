@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 import flow from 'lodash.flow';
 import { darken, desaturate, saturate, transparentize } from 'polished';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
 const colors = {
   success: 'seagreen',

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import FormGroup from 'components/form/FormGroup';
-import FormError from 'components/form/FormError';
-import FormLabel from 'components/form/FormLabel';
-import FormInput from 'components/form/FormInput';
+import FormError from './form/FormError';
+import FormGroup from './form/FormGroup';
+import FormInput from './form/FormInput';
+import FormLabel from './form/FormLabel';
 
 const Form = styled.form`
   padding-top: 1em;

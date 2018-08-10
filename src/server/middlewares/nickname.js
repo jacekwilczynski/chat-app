@@ -6,7 +6,6 @@ const check = ({ dispatch, getState }) => next => action => {
   if (action.type === serverActions.MESSAGE) {
     const message = action.payload;
     if (message.type === '[nickname] CHECK_AVAILABILITY') {
-      console.log('Checking nickname availability...');
       const { socket } = action.meta;
       const nickname = message.payload;
       const isAvailable = isNicknameAvailable(getState(), nickname);

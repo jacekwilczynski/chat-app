@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import Welcome from 'pages/login/Welcome';
 import LoginPanel from 'pages/login/LoginPanel';
+import Welcome from 'pages/login/Welcome';
+import React, { Fragment } from 'react';
 
 class Login extends React.Component {
   render() {

@@ -1,6 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
-import reducer from 'reducer';
 import middlewares from 'middlewares';
+import reducer from 'reducer';
+import { applyMiddleware, createStore } from 'redux';
 
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(require('redux-logger').default);
