@@ -1,12 +1,14 @@
+import configureStore from 'configureStore';
+import 'index.css';
+import { injectDispatch } from 'middlewares/socket';
+import Login from 'pages/Login';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
-import configureStore from 'configureStore';
 import { Provider } from 'react-redux';
-import Login from 'pages/Login';
-import 'index.css';
+import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore();
+injectDispatch(store.dispatch);
 
 ReactDOM.render(
   <Provider store={store}>

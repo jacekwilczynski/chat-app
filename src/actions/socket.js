@@ -1,15 +1,10 @@
 export const JOIN = '[socket] JOIN';
-export const LISTEN = '[socket] LISTEN';
 export const SEND = '[socket] SEND';
-export const MESSAGE_RECEIVED = '[socket] MESSAGE_RECEIVED';
+export const MESSAGE = '[socket] MESSAGE';
 
 export const join = initialData => ({
   type: JOIN,
   payload: initialData
-});
-
-export const listen = () => ({
-  type: LISTEN
 });
 
 export const send = message => ({
@@ -17,7 +12,7 @@ export const send = message => ({
   payload: message
 });
 
-export const messageReceived = message => ({
-  type: MESSAGE_RECEIVED,
+export const message = message => ({
+  type: MESSAGE,
   payload: message
 });

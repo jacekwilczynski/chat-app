@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server-once": "babel-node server",
+    "server-once": "NODE_ENV=development NODE_PATH=server babel-node server",
     "server": "nodemon --exec npm run server-once",
     "client": "react-scripts start",
     "build": "react-scripts build",

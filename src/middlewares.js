@@ -1,15 +1,7 @@
-import throttle from 'middlewares/throttle';
-import api from 'middlewares/api';
-import socket from 'middlewares/socket';
-import nickname from 'middlewares/nickname';
-import user from 'middlewares/user';
 import loginView from 'middlewares/loginView';
+import nickname from 'middlewares/nickname';
+import socket from 'middlewares/socket';
+import throttle from 'middlewares/throttle';
+import user from 'middlewares/user';
 
-export default [
-  ...throttle,
-  ...api,
-  ...socket,
-  ...nickname,
-  ...user,
-  ...loginView
-];
+export default [...throttle, ...socket, ...nickname, ...user, ...loginView];

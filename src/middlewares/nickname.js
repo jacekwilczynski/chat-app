@@ -1,15 +1,14 @@
-import * as apiActions from 'actions/api';
 import * as nicknameActions from 'actions/nickname';
+import * as socketActions from 'actions/socket';
 
 const checkAvailability = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === nicknameActions.CHECK_AVAILABILITY) {
     const nickname = action.payload;
     dispatch(
-      apiActions.request({
-        url: `/api/nickname/check/${nickname}`,
-        onSuccess: nicknameActions.RECEIVE_AVAILABILITY,
-        meta: { nickname }
+      socketActions.send({
+        type: '[nickname] CHECK_AVAILABILITY',
+        payload: nickname
       })
     );
   }
@@ -17,13 +16,17 @@ const checkAvailability = ({ dispatch }) => next => action => {
 
 const receiveAvailability = ({ dispatch }) => next => action => {
   next(action);
-  if (action.type === nicknameActions.RECEIVE_AVAILABILITY) {
-    dispatch(
-      nicknameActions.updateAvailability({
-        nickname: action.meta.nickname,
-        isAvailable: action.payload.data === true
-      })
-    );
+  if (action.type === socketActions.MESSAGE) {
+    const message = action.payload;
+    if ((message.type = '[nickname] AVAILABILITY')) {
+      const { nickname, isAvailable } = message.payload;
+      dispatch(
+        nicknameActions.updateAvailability({
+          nickname,
+          isAvailable
+        })
+      );
+    }
   }
 };
 

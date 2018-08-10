@@ -6,12 +6,13 @@ const connection = ({ dispatch }) => next => action => {
   if (action.type === serverActions.CONNECTION) {
     const { socket } = action.payload;
     socket.on('message', strMessage => {
-      let parsedMessage;
       try {
-        parsedMessage = JSON.parse(strMessage);
+        const parsedMessage = JSON.parse(strMessage);
         dispatch(serverActions.message({ socket, message: parsedMessage }));
       } catch (e) {
-        dispatch(errorActions.wrongMessageFormat({ socket, strMessage }));
+        dispatch(
+          errorActions.wrongMessageFormat({ socket, message: strMessage })
+        );
       }
     });
   }
@@ -31,7 +32,10 @@ const sendErrors = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === errorActions.WRONG_MESSAGE_FORMAT) {
     dispatch(
-      serverActions.send([action.payload.socket], action.payload.message)
+      serverActions.send([action.payload.socket], {
+        type: errorActions.WRONG_MESSAGE_FORMAT,
+        payload: action.payload.message
+      })
     );
   }
 };

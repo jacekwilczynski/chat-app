@@ -1,5 +1,5 @@
-import * as userActions from 'actions/user';
 import * as socketActions from 'actions/socket';
+import * as userActions from 'actions/user';
 
 const join = ({ dispatch }) => next => action => {
   next(action);
@@ -11,18 +11,11 @@ const join = ({ dispatch }) => next => action => {
 const joinAccept = ({ dispatch }) => next => action => {
   next(action);
   if (
-    action.type === socketActions.messageReceived &&
+    action.type === socketActions.message &&
     action.payload.type === 'JOIN_ACCEPT'
   ) {
     dispatch(userActions.loggedIn(action.payload));
   }
 };
 
-const loggedIn = ({ dispatch }) => next => action => {
-  next(action);
-  if (action.type === userActions.loggedIn) {
-    alert('Logged in!');
-  }
-};
-
-export default [join, joinAccept, loggedIn];
+export default [join, joinAccept];
