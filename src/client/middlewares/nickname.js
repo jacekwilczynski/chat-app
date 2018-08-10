@@ -14,7 +14,7 @@ const receiveAvailability = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === socketActions.MESSAGE) {
     const message = action.payload;
-    if ((message.type = nicknameMessages.AVAILABILITY)) {
+    if (message.type === nicknameMessages.AVAILABILITY) {
       const { nickname, isAvailable } = message.payload;
       dispatch(
         nicknameActions.updateAvailability({
