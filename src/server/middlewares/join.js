@@ -8,7 +8,7 @@ const decide = ({ dispatch }) => next => action => {
       nicknameActions.checkAvailability(
         action.payload.nickname,
         ({ nickname, isAvailable }) => {
-          action.meta.next({ isAvailable, nickname });
+          action.meta.next({ nickname, accepted: isAvailable });
         }
       )
     );
