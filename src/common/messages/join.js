@@ -8,7 +8,7 @@ export const request = nickname => ({
   }
 });
 
-export const response = accepted => ({
+export const response = ({ accepted, nickname }) => ({
   type: RESPONSE,
-  payload: { accepted }
+  payload: { accepted, nickname }
 });
