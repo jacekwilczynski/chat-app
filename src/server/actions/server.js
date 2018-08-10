@@ -16,7 +16,7 @@ export const connection = ({ socket, request }) => ({
   }
 });
 
-export const message = ({ socket, message }) => ({
+export const message = (socket, message) => ({
   type: MESSAGE,
   payload: message,
   meta: {

@@ -6,7 +6,7 @@ export const checkAvailability = nickname => ({
   payload: nickname
 });
 
-export const availability = (nickname, isAvailable) => ({
+export const availability = ({ nickname, isAvailable }) => ({
   type: AVAILABILITY,
   payload: { nickname, isAvailable }
 });

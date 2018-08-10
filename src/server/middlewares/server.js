@@ -8,11 +8,12 @@ const connection = ({ dispatch }) => next => action => {
     socket.on('message', strMessage => {
       try {
         const parsedMessage = JSON.parse(strMessage);
-        dispatch(serverActions.message({ socket, message: parsedMessage }));
+        dispatch(serverActions.message(socket, parsedMessage));
       } catch (e) {
         dispatch(
           errorActions.wrongMessageFormat({ socket, message: strMessage })
         );
+        throw e;
       }
     });
   }
@@ -22,8 +23,9 @@ const send = () => next => action => {
   next(action);
   if (action.type === serverActions.SEND) {
     const { sockets, message } = action.payload;
+    const serialized = JSON.stringify(message);
     for (let socket of sockets) {
-      socket.send(JSON.stringify(message));
+      socket.send(serialized);
     }
   }
 };
