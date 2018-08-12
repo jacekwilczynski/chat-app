@@ -4,10 +4,7 @@ import * as serverActions from 'server/actions/server';
 import { inspect } from 'util';
 
 Object.prototype[inspect.custom] = function() {
-  if (
-    ['object', 'function'].includes(typeof this) &&
-    Object.getPrototypeOf(this) === Object.prototype
-  ) {
+  if (Object.getPrototypeOf(this) === Object.prototype) {
     return this;
   } else {
     return this.constructor.name;
