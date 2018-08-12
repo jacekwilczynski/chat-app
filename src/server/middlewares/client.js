@@ -28,15 +28,16 @@ const listen = ({ dispatch }) => next => action => {
   if (action.type === clientActions.LISTEN) {
     const socket = sockets.get(action.payload.id);
     socket.on('message', strMessage => {
+      let parsedMessage;
       try {
-        const parsedMessage = JSON.parse(strMessage);
-        dispatch(serverActions.message(socket, parsedMessage));
+        parsedMessage = JSON.parse(strMessage);
       } catch (e) {
         dispatch(
           errorActions.wrongMessageFormat({ socket, message: strMessage })
         );
-        throw e;
+        return;
       }
+      dispatch(serverActions.message(socket, parsedMessage));
     });
   }
 };
