@@ -2,9 +2,13 @@ import * as joinActions from 'server/actions/join';
 import * as nicknameActions from 'server/actions/nickname';
 import * as serverActions from 'server/actions/server';
 import { inspect } from 'util';
-import WebSocket from 'ws';
 
-WebSocket.prototype[inspect.custom] = () => '[WebSocket]';
+Object.prototype[inspect.custom] = function() {
+  return ['object', 'function'].includes(typeof this) &&
+    Object.getPrototypeOf(this) === Object.prototype
+    ? this
+    : this.constructor.name;
+};
 
 const subLoggers = {
   default:
