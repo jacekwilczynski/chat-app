@@ -4,10 +4,14 @@ import * as serverActions from 'server/actions/server';
 import { inspect } from 'util';
 
 Object.prototype[inspect.custom] = function() {
-  return ['object', 'function'].includes(typeof this) &&
+  if (
+    ['object', 'function'].includes(typeof this) &&
     Object.getPrototypeOf(this) === Object.prototype
-    ? this
-    : this.constructor.name;
+  ) {
+    return this;
+  } else {
+    return this.constructor.name;
+  }
 };
 
 const subLoggers = {
