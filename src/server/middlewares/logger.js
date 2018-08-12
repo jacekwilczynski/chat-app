@@ -14,7 +14,7 @@ Object.prototype[inspect.custom] = function inspectOnlyIfPlain() {
 const subLoggers = {
   default:
     process.env.NODE_ENV === 'development' &&
-    (action => 'action: ' + inspect(action)),
+    (action => 'action: ' + inspect(action, { depth: null })),
   [serverActions.LISTENING]: action =>
     `WebSocket server listening on port ${action.meta.port}.`,
   [serverActions.CONNECTION]: action =>
