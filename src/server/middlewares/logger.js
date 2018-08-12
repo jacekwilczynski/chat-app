@@ -1,8 +1,11 @@
 import 'colors';
 import { inspect } from 'util';
 
-Object.prototype[inspect.custom] = function inspectOnlyIfPlain() {
-  if (Object.getPrototypeOf(this) === Object.prototype) {
+const isSerializable = obj =>
+  [Object.prototype, Array.prototype].includes(Object.getPrototypeOf(obj));
+
+Object.prototype[inspect.custom] = function() {
+  if (isSerializable(this)) {
     return this;
   } else {
     return this.constructor.name.gray;
@@ -22,7 +25,16 @@ const subLoggers = {
           colors: true,
           compact: false,
           depth: null
-        }).replace(/[{}]/g, ' ')
+        })
+          .replace(/[{}]/g, ' ')
+          .replace(
+            /(\n\s*)(\[)(\s)/g,
+            (_, p1, p2, p3) => `${p1}${p2.gray}${p3}`
+          )
+          .replace(
+            /(\s*)(])(,?\s*\s)/g,
+            (_, p1, p2, p3) => `${p1}${p2.gray}${p3}`
+          )
       );
     })
 };
