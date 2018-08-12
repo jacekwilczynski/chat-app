@@ -24,7 +24,8 @@ const makeString = action => {
     inspect(actionCopy, inspectOptions)
       .replace(braces, ' ')
       .replace(arrayOpeningBrackets, styleBrackets)
-      .replace(arrayClosingBrackets, styleBrackets)
+      .replace(arrayClosingBrackets, styleBrackets) +
+    '\n'
   );
 };
 
