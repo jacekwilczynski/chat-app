@@ -32,7 +32,7 @@ const subLoggers = {
             (_, p1, p2, p3) => `${p1}${p2.gray}${p3}`
           )
           .replace(
-            /(\s*)(])(,?\s*\s)/g,
+            /(\s)(])(,?\s)/g,
             (_, p1, p2, p3) => `${p1}${p2.gray}${p3}`
           )
       );
