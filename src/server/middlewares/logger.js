@@ -2,6 +2,9 @@ import * as joinActions from 'server/actions/join';
 import * as nicknameActions from 'server/actions/nickname';
 import * as serverActions from 'server/actions/server';
 import { inspect } from 'util';
+import WebSocket from 'ws';
+
+WebSocket.prototype[inspect.custom] = () => '[WebSocket]';
 
 const subLoggers = {
   default:
