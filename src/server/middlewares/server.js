@@ -8,17 +8,6 @@ const connection = ({ dispatch }) => next => action => {
   if (action.type === serverActions.CONNECTION) {
     const { socket } = action.payload;
     dispatch(clientActions.register({ id: uuid.v4(), socket }));
-    socket.on('message', strMessage => {
-      try {
-        const parsedMessage = JSON.parse(strMessage);
-        dispatch(serverActions.message(socket, parsedMessage));
-      } catch (e) {
-        dispatch(
-          errorActions.wrongMessageFormat({ socket, message: strMessage })
-        );
-        throw e;
-      }
-    });
   }
 };
 
