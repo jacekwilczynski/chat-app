@@ -5,11 +5,19 @@ import * as uuid from 'uuid';
 
 const sockets = new Map();
 
+const connection = ({ dispatch }) => next => action => {
+  next(action);
+  if (action.type === clientActions.CONNECTION) {
+    const { socket } = action.payload;
+    const id = uuid.v4();
+    dispatch(clientActions.register({ id, socket }));
+  }
+};
+
 const register = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === clientActions.REGISTER) {
-    const { socket } = action.payload;
-    const id = uuid.v4();
+    const { id, socket } = action.payload;
     sockets.set(id, socket);
     dispatch(clientActions.listen(id));
   }
@@ -33,4 +41,4 @@ const listen = ({ dispatch }) => next => action => {
   }
 };
 
-export default [register, listen];
+export default [connection, register, listen];

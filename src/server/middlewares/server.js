@@ -6,7 +6,7 @@ const connection = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === serverActions.CONNECTION) {
     const { socket } = action.payload;
-    dispatch(clientActions.register({ socket }));
+    dispatch(clientActions.connection({ socket }));
   }
 };
 
