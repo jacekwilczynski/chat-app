@@ -1,9 +1,9 @@
 export const REGISTER = '[client] REGISTER';
 export const LISTEN = '[client] LISTEN';
 
-export const register = ({ id, socket }) => ({
+export const register = ({ socket }) => ({
   type: REGISTER,
-  payload: { id, socket }
+  payload: { socket }
 });
 
 export const listen = id => ({

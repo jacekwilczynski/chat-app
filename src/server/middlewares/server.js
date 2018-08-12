@@ -1,13 +1,12 @@
 import * as clientActions from 'server/actions/client';
 import * as errorActions from 'server/actions/error';
 import * as serverActions from 'server/actions/server';
-import * as uuid from 'uuid';
 
 const connection = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === serverActions.CONNECTION) {
     const { socket } = action.payload;
-    dispatch(clientActions.register({ id: uuid.v4(), socket }));
+    dispatch(clientActions.register({ socket }));
   }
 };
 
