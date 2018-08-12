@@ -3,7 +3,7 @@ import * as nicknameActions from 'server/actions/nickname';
 import * as serverActions from 'server/actions/server';
 import { inspect } from 'util';
 
-Object.prototype[inspect.custom] = function() {
+Object.prototype[inspect.custom] = function inspectOnlyIfPlain() {
   if (Object.getPrototypeOf(this) === Object.prototype) {
     return this;
   } else {
