@@ -1,5 +1,4 @@
 import * as clientActions from 'server/actions/client';
-import * as errorActions from 'server/actions/error';
 import * as uuid from 'uuid';
 
 const sockets = new Map();
@@ -32,9 +31,6 @@ const listen = ({ dispatch }) => next => action => {
       try {
         parsedMessage = JSON.parse(strMessage);
       } catch (e) {
-        dispatch(
-          errorActions.wrongMessageFormat({ socket, message: strMessage })
-        );
         return;
       }
       dispatch(clientActions.message(id, parsedMessage));
