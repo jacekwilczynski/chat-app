@@ -1,7 +1,3 @@
-import * as joinActions from 'server/actions/join';
-import * as nicknameActions from 'server/actions/nickname';
-import * as serverActions from 'server/actions/server';
-import * as socketActions from 'server/actions/socket';
 import { inspect } from 'util';
 
 Object.prototype[inspect.custom] = function inspectOnlyIfPlain() {
@@ -15,19 +11,7 @@ Object.prototype[inspect.custom] = function inspectOnlyIfPlain() {
 const subLoggers = {
   default:
     process.env.NODE_ENV === 'development' &&
-    (action => 'action: ' + inspect(action, { depth: null })),
-  [serverActions.LISTENING]: action =>
-    `WebSocket server listening on port ${action.meta.port}.`,
-  [serverActions.CONNECTION]: action =>
-    `New connection from ${action.payload.request.socket.remoteAddress}`,
-  [socketActions.MESSAGE]: action =>
-    `Received message: ${inspect(action.payload)}`,
-  [socketActions.SEND]: action =>
-    `Sending message: ${inspect(action.payload.message)}`,
-  [nicknameActions.CHECK_AVAILABILITY]: action =>
-    `Checking whether the nickname "${action.payload}" is available.`,
-  [joinActions.REQUESTED]: action =>
-    `Considering a new join request from "${action.payload.nickname}".`
+    (action => 'action: ' + inspect(action, { depth: null }))
 };
 
 const logger = () => next => action => {
