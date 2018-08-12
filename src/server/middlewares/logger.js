@@ -1,6 +1,7 @@
 import * as joinActions from 'server/actions/join';
 import * as nicknameActions from 'server/actions/nickname';
 import * as serverActions from 'server/actions/server';
+import * as socketActions from 'server/actions/socket';
 import { inspect } from 'util';
 
 Object.prototype[inspect.custom] = function inspectOnlyIfPlain() {
@@ -19,9 +20,9 @@ const subLoggers = {
     `WebSocket server listening on port ${action.meta.port}.`,
   [serverActions.CONNECTION]: action =>
     `New connection from ${action.payload.request.socket.remoteAddress}`,
-  [serverActions.MESSAGE]: action =>
+  [socketActions.MESSAGE]: action =>
     `Received message: ${inspect(action.payload)}`,
-  [serverActions.SEND]: action =>
+  [socketActions.SEND]: action =>
     `Sending message: ${inspect(action.payload.message)}`,
   [nicknameActions.CHECK_AVAILABILITY]: action =>
     `Checking whether the nickname "${action.payload}" is available.`,
