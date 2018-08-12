@@ -1,37 +1,47 @@
-import * as joinActions from 'server/actions/join';
-import * as nicknameActions from 'server/actions/nickname';
-import * as serverActions from 'server/actions/server';
+import 'colors';
 import { inspect } from 'util';
 
-Object.prototype[inspect.custom] = function inspectOnlyIfPlain() {
-  if (Object.getPrototypeOf(this) === Object.prototype) {
+const isSerializable = obj =>
+  [Object.prototype, Array.prototype].includes(Object.getPrototypeOf(obj));
+
+Object.prototype[inspect.custom] = function() {
+  if (isSerializable(this)) {
     return this;
   } else {
-    return this.constructor.name;
+    return this.constructor.name.gray;
   }
 };
 
 const subLoggers = {
   default:
     process.env.NODE_ENV === 'development' &&
-    (action => 'action: ' + inspect(action)),
-  [serverActions.LISTENING]: action =>
-    `WebSocket server listening on port ${action.meta.port}.`,
-  [serverActions.CONNECTION]: action =>
-    `New connection from ${action.payload.request.socket.remoteAddress}`,
-  [serverActions.MESSAGE]: action =>
-    `Received message: ${inspect(action.payload)}`,
-  [serverActions.SEND]: action =>
-    `Sending message: ${inspect(action.payload.message)}`,
-  [nicknameActions.CHECK_AVAILABILITY]: action =>
-    `Checking whether the nickname "${action.payload}" is available.`,
-  [joinActions.REQUESTED]: action =>
-    `Considering a new join request from "${action.payload.nickname}".`
+    (action => {
+      const actionCopy = Object.assign({}, action);
+      delete actionCopy.type;
+      return (
+        `${action.type}:\n`.blue.bold +
+        inspect(actionCopy, {
+          breakLength: 1,
+          colors: true,
+          compact: false,
+          depth: null
+        })
+          .replace(/[{}]/g, ' ')
+          .replace(
+            /(\n\s*)(\[)(\s)/g,
+            (_, p1, p2, p3) => `${p1}${p2.gray}${p3}`
+          )
+          .replace(
+            /(\s)(])(,?\s)/g,
+            (_, p1, p2, p3) => `${p1}${p2.gray}${p3}`
+          )
+      );
+    })
 };
 
 const logger = () => next => action => {
   const subLogger = subLoggers[action.type] || subLoggers.default;
-  if (subLogger) console.log(subLogger(action));
+  if (subLogger) console.log(subLogger(action) + '\n');
   next(action);
 };
 
