@@ -10,17 +10,6 @@ const connection = ({ dispatch }) => next => action => {
   }
 };
 
-const send = () => next => action => {
-  next(action);
-  if (action.type === serverActions.SEND) {
-    const { sockets, message } = action.payload;
-    const serialized = JSON.stringify(message);
-    for (let socket of sockets) {
-      socket.send(serialized);
-    }
-  }
-};
-
 const sendErrors = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === errorActions.WRONG_MESSAGE_FORMAT) {
@@ -33,4 +22,4 @@ const sendErrors = ({ dispatch }) => next => action => {
   }
 };
 
-export default [connection, send, sendErrors];
+export default [connection, sendErrors];

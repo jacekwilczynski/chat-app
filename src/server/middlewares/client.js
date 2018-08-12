@@ -1,6 +1,5 @@
 import * as clientActions from 'server/actions/client';
 import * as errorActions from 'server/actions/error';
-import * as serverActions from 'server/actions/server';
 import * as uuid from 'uuid';
 
 const sockets = new Map();
@@ -26,7 +25,8 @@ const register = ({ dispatch }) => next => action => {
 const listen = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === clientActions.LISTEN) {
-    const socket = sockets.get(action.payload.id);
+    const { id } = action.payload;
+    const socket = sockets.get(id);
     socket.on('message', strMessage => {
       let parsedMessage;
       try {
@@ -37,9 +37,20 @@ const listen = ({ dispatch }) => next => action => {
         );
         return;
       }
-      dispatch(serverActions.message(socket, parsedMessage));
+      dispatch(clientActions.message(id, parsedMessage));
     });
   }
 };
 
-export default [connection, register, listen];
+const send = () => next => action => {
+  next(action);
+  if (action.type === clientActions.SEND) {
+    const { clientIds, message } = action.payload;
+    const serialized = JSON.stringify(message);
+    clientIds
+      .map(id => sockets.get(id))
+      .forEach(socket => socket.send(serialized));
+  }
+};
+
+export default [connection, register, listen, send];
