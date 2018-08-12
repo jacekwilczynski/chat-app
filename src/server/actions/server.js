@@ -3,13 +3,10 @@ export const CONNECTION = '[server] CONNECTION';
 
 export const listening = ({ port }) => ({
   type: LISTENING,
-  meta: { port }
+  payload: { port }
 });
 
 export const connection = ({ socket, request }) => ({
   type: CONNECTION,
-  payload: {
-    socket,
-    request
-  }
+  payload: { socket, request }
 });
