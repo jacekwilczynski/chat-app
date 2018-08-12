@@ -1,8 +1,8 @@
-export const CONNECTION = '[client] CONNECTION';
-export const REGISTER = '[client] REGISTER';
-export const LISTEN = '[client] LISTEN';
-export const MESSAGE = '[client] MESSAGE';
-export const SEND = '[client] SEND';
+export const CONNECTION = '[socket] CONNECTION';
+export const REGISTER = '[socket] REGISTER';
+export const LISTEN = '[socket] LISTEN';
+export const MESSAGE = '[socket] MESSAGE';
+export const SEND = '[socket] SEND';
 
 export const connection = ({ socket }) => ({
   type: CONNECTION,

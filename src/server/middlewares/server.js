@@ -1,11 +1,11 @@
-import * as clientActions from 'server/actions/client';
 import * as serverActions from 'server/actions/server';
+import * as socketActions from 'server/actions/socket';
 
 const connection = ({ dispatch }) => next => action => {
   next(action);
   if (action.type === serverActions.CONNECTION) {
     const { socket } = action.payload;
-    dispatch(clientActions.connection({ socket }));
+    dispatch(socketActions.connection({ socket }));
   }
 };
 

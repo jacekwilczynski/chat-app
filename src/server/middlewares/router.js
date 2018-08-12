@@ -1,15 +1,15 @@
-import * as clientActions from 'server/actions/client';
+import * as socketActions from 'server/actions/socket';
 import routes from 'server/routes';
 
 const router = ({ dispatch }) => next => action => {
   next(action);
-  if (action.type === clientActions.MESSAGE) {
+  if (action.type === socketActions.MESSAGE) {
     const { clientId, message } = action.payload;
     const route = routes[message.type];
     if (route) {
       dispatch(
         route.action(message.payload, data =>
-          dispatch(clientActions.send([clientId], route.response(data)))
+          dispatch(socketActions.send([clientId], route.response(data)))
         )
       );
     }
