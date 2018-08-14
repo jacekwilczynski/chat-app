@@ -1,8 +1,22 @@
+import * as errorActions from 'client/actions/error';
 import * as socketActions from 'client/actions/socket';
 import configureSocket from './socket/configure';
 
-const { socket, injectDispatch: inject } = configureSocket();
-export const injectDispatch = inject;
+const socket = configureSocket();
+
+const listen = ({ dispatch }) => next => action => {
+  next(action);
+  if (action.type === socketActions.LISTEN) {
+    socket.addEventListener('message', event => {
+      try {
+        const message = JSON.parse(event.data);
+        dispatch(socketActions.message(message));
+      } catch (e) {
+        dispatch(errorActions.wrongMessageFormat(event.data));
+      }
+    });
+  }
+};
 
 const send = () => next => action => {
   next(action);
@@ -11,4 +25,4 @@ const send = () => next => action => {
   }
 };
 
-export default [send];
+export default [listen, send];
